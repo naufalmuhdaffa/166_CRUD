@@ -50,7 +50,7 @@ app.post('/api/mahasiswa', (req, res) => {
     }
 
     db.query(
-        'INSERT INTO mahasiswa (nama, agama, alamat) VALUES (?, ?, ?)',
+        'INSERT INTO biodata (nama, agama, alamat) VALUES (?, ?, ?)',
         [nama, agama, alamat],
         (err, results) => {
             if (err) {
