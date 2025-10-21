@@ -41,3 +41,23 @@ app.get('/api/mahasiswa', (req, res) => {
         res.json(results);
     });
 });
+
+app.post('/api/mahasiswa', (req, res) => {
+    const { nama, agama, alamat } = req.body || {};
+    
+    if (!nama || !agama || !alamat) {
+        return res.status(400).json({ message: 'Nama, agama, alamat wajib diisi' });
+    }
+
+    db.query(
+        'INSERT INTO mahasiswa (nama, agama, alamat) VALUES (?, ?, ?)',
+        [nama, agama, alamat],
+        (err, results) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Database error' });
+            }
+            res.status(201).json({ message: 'User created successfully' });
+        }
+    );
+});
